@@ -1,4 +1,3 @@
-import pytest
 import unittest
 
 from src.eggshells import Interpreter

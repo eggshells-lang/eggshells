@@ -4,9 +4,20 @@ language: python
 python:
   - 3.6
 
+notifications:
+  email: false
+
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
+  - "pip install flake8"
+  - "pip install black"
+  - "pip install -r requirements.txt"
+
+# check code formating
+before_script:
+  - flake8 --max-line-length=100
+  - black --diff --check ./
+
 # command to run tests
 script:
   - pytest

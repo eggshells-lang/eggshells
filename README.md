@@ -1,0 +1,1 @@
+# Eggshells [![Build Status](https://travis-ci.com/watkinsm/eggshells.svg?branch=master)](https://travis-ci.com/watkinsm/eggshells)

@@ -1,7 +1,4 @@
-import random
 import re
-import sys
-import time
 
 from math import sqrt
 
@@ -40,9 +37,10 @@ class Interpreter:
         }
 
         self.regex = re.compile(
-            r"""'.*?'|".*?"|\(|\)|\d+\.\d*|\d+|\[.*\]|[^\(\)\s]+""",
-            re.VERBOSE)
-        # self.regex = re.compile(r''''.*?'|".*?"|\(|\)|\d+\.\d*|\d+|[^\(\)\s]+''', re.VERBOSE)
+            r"""'.*?'|".*?"|\(|\)|\d+\.\d*|\d+|\[.*\]|[^\(\)\s]+""", re.VERBOSE
+        )
+        # self.regex = re.compile(
+        #    r''''.*?'|".*?"|\(|\)|\d+\.\d*|\d+|[^\(\)\s]+''', re.VERBOSE)
         # r'''
         # '.*?' | # single quoted substring
         # ".*?" | # double quoted substring
@@ -112,8 +110,7 @@ class Interpreter:
             raise Exception("Some problem with your variable")
 
     def strng(self):
-        return string("".join(
-            [str(s) for s in self._get_params((string, number))]))
+        return string("".join([str(s) for s in self._get_params((string, number))]))
 
     def interpret(self, script):
         try:
@@ -142,8 +139,7 @@ class Interpreter:
                         elif tok[0] not in ["'", '"', "[", "]"]:
                             if tok in self.functions:
                                 params = []
-                                for _ in range(
-                                        self.function_parameter_counts[tok]):
+                                for _ in range(self.function_parameter_counts[tok]):
                                     if ")" != self.stack[-1]:
                                         params.append(self.stack.pop())
                                 self.stack.append(params)
@@ -158,7 +154,8 @@ class Interpreter:
                                     self.stack.append(self.env[tok])
                                 else:
                                     raise Exception(
-                                        f"{tok} is not a valid token/function")
+                                        f"{tok} is not a valid token/function"
+                                    )
                         elif tok[0] == "'":
                             tok = tok[1:]
                             str_tok = ""
@@ -179,8 +176,7 @@ class Interpreter:
                             self.stack.append(vector(tok))
                             continue
                         else:
-                            raise Exception(
-                                f"{tok} is not a valid token/function")
+                            raise Exception(f"{tok} is not a valid token/function")
 
                     elif tok in self.functions:
                         params = []
@@ -252,8 +248,7 @@ class vector:
     # ['this', 'is', 1, ['vector']]
     def __init__(self, vals):
         self.vals = vals
-        self.regex = re.compile(
-            r""""[^\"]*?"|'[^\']*?'|\d+\.\d*|\d+|\[.*?\]""")
+        self.regex = re.compile(r""""[^\"]*?"|'[^\']*?'|\d+\.\d*|\d+|\[.*?\]""")
         self._build_vec()
         self.val = str(self)
 
@@ -319,6 +314,5 @@ def _pp_helper(l, d=0):
 #     es = Interpreter()
 #     es.debug = True
 #     script = """(print 'l(o)))l')()(print 'lol lol')(var a 33)(print a)(print 33)"""
-
 #     es.interpret(script)
 #     print(es.std_out)
